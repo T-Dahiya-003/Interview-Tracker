@@ -1,0 +1,36 @@
+
+<style>
+ .css{
+    font-family:helvetica;
+     text-transform:uppercase;
+     font-weight: bold;
+ }  
+ #footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+              /* Footer height */
+}
+</style>
+<%- include("./partials/navbar"); %>
+
+<div>
+<% questionbytopic.forEach(questions => { %>
+    <div>
+        <% if(questions.approved) {%>
+       
+        <div class="card" style="height:5rem">
+            <div class="card-body css">
+                
+                <%= questions.name %><div class="float-right"><a href="<%= questions.linkto %>" target="_blank"><button class="btn btn-outline-primary">View Question</button></a></div>
+            </div>
+          </div>
+          <br>
+        <% } %>
+    
+
+    </div>
+
+<%})%>
+<footer id="footer"><%- include("./partials/footer"); %></footer>
+</div>

@@ -1,0 +1,175 @@
+<head>
+  <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+ 
+
+</head>
+<style>
+.pointer-link { 
+    cursor: pointer; 
+} 
+.baseBlock {
+  margin: 0px 0px 35px 0px !important;
+  padding: 0 0 15px 0px !important;
+  border-radius: 5px;
+  overflow: hidden;
+  min-height: 170px;
+  background: #fff;
+  -moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  -o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.baseBlock:hover {
+  -webkit-transform: translate(0, -8px);
+  -moz-transform: translate(0, -8px);
+  -ms-transform: translate(0, -8px);
+  -o-transform: translate(0, -8px);
+  transform: translate(0, -8px);
+  box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
+.form-control::placeholder {
+font-size: 0.95rem;
+color: rgb(173, 164, 164);
+font-style: italic;
+}
+@media screen and (min-width: 676px) {
+        .modal-dialog {
+          max-width: 800px; /* New width for default modal */
+        }
+    }
+</style>
+
+<%- include("./partials/navbar"); %>
+
+<div style="width:30%"><%- include ("./partials/messages"); %></div>
+
+  <!-- End -->
+  
+<style>
+  @media screen and (min-width: 676px) {
+    .modal-dialog {
+      max-width: 800px; /* New width for default modal */
+    }
+}
+</style>
+
+
+
+      <!-- Custom rounded search bars with input group -->
+      <div style="margin-left: 14px;" >
+      <form action="/comps" method="GET">
+          <div class="input-group mb-4">
+              <input type="text" name ="name" value="<%= searchOptions.name %>" placeholder="Enter name of company to search..." aria-describedby="button-addon6" class="form-control">
+              <div class="input-group-append">
+                <button id="button-addon6" type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          
+        </form>
+      </div>
+        <!-- End -->
+<button class="btn btn-outline-success mb-2" data-target="#mymodel" 
+data-toggle="modal" style="margin-left: 14px;" >Add Experience</button>
+<br>
+<div class="modal fade" id="mymodel">
+    <div class="modal-dialog" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <h3>Share Experience</h3>
+                <button type="button" class="close" data-dismiss="modal"> &times; </button>
+            </div>
+            <div class="modal-body">
+              <form action="/comps" method="POST" role="form" enctype="multipart/form-data" >
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input
+                    name="name"
+                    class="form-control"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="image">Image</label>
+                  <input
+                    type="file"
+                    name="file"
+                    class="form-control"
+                    
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label for="branch">Branch:</label>
+                  <select name="branch" >
+                    <option value="CSE">CSE</option>
+                    <option value="MNC">MNC</option>
+                    <option value="EEE">EEE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="ECE">ECE</option>
+                    <option value="CL">CL</option>
+                    <option value="ME">ME</option>
+                    <option value="CST">CST</option>
+                    <option value="CE">CE</option>
+                    <option value="BT">BT</option>
+                </select>
+                </div>
+                <div class="form-group">
+                  <label for="year">Current Year:</label>
+                  <select name="year" >
+                    <option value="Freshman">Freshmen</option>
+                    <option value="Sophomore" >Sophomore</option>
+                    <option value="Prefinal">Prefinal</option>
+                    <option value="Final">Final</option>
+                </select>
+                </div>
+                <div class="form-group">
+                    <label>Company:</label>
+                    <select name="company">
+                      <% comps.forEach(comp => { %>
+                        <% if (comp.id === exp.company) { %>
+                          <option selected value="<%= comp.id %>"><label><%= comp.name %></label></option> 
+                        <% } else { %>
+                            <option selected value="<%= comp.id %>"><label><%= comp.name %></label></option>
+                        <% } %>
+                      <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                  <label class="control-label " for="exp">Experience:</label>
+                  <div >
+                  <textarea class="form-control" rows="5" id="editor" name="exp"></textarea>
+                  </div>
+                </div>
+                <input type="submit" class="btn btn-block btn-outline-danger" value="Submit">
+            </form>
+            </div>
+        </div>
+    </div>
+
+  </div>
+<br>
+<div class="container ">
+    <div class="row">
+      
+      <% comps.forEach(comp => { %>
+    
+       
+        <div class="col-md-4 m-auto">
+          <div class="card baseBlock">
+            <a href="/comps/<%= comp.id %>"><img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="<%= comp.imgurl %>" data-holder-rendered="true"></a>
+            <div class="card-body">
+              <h4 class="card-title text-center"><%= comp.name %></h4>
+         
+         
+            </div>
+          </div>
+       </div>
+       <%})%>
+    </div>
+  </div>
+</div>
+  <script>
+    CKEDITOR.replace('editor');
+  </script>
+
+<%- include("./partials/footer"); %>

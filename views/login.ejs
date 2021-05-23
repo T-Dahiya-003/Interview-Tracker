@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sliding Login Form</title>
+	<%- include ("./partials/styles"); %>
+	<style>
+		.img-logo{
+			border-radius: 50%;
+			height:230px;
+			width:230px;
+		}
+		i {
+    margin-left: 240px;
+	margin-top: -35px;
+    cursor: pointer;
+}
+	</style>
+</head>
+<body>
+    <%- include ("./partials/messages"); %>
+
+
+	<div class="container" id="main">
+		
+		<div class="sign-up">
+            
+			<form action="/users/register" method="POST">
+				<h1>Create Account</h1>
+				
+				
+				<input
+				type="name"
+				id="name"
+				name="name"
+				class="form-control"
+				placeholder="Enter Name"
+				value="<%= typeof name != 'undefined' ? name : '' %>"
+			  />
+			
+			  <input
+				type="email"
+				id="email"
+				name="email"
+				class="form-control"
+				placeholder="Enter Email"
+				value="<%= typeof email != 'undefined' ? email : '' %>"
+			  />
+			
+			  <input
+				type="password"
+				id="password"
+				name="password"
+				class="form-control"
+				placeholder="Create Password"
+				value="<%= typeof password != 'undefined' ? password : '' %>"
+			  />
+			
+			  <input
+				type="password"
+				id="password2"
+				name="password2"
+				class="form-control"
+				placeholder="Confirm Password"
+				value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+			  />
+				<button>Sign Up</button>
+			</form>
+		</div>
+		<div class="sign-in">
+			<form action="/users/login" method="POST">
+				<h1>Sign in</h1>
+				<p>Please Sign In to get Access</p>
+				
+				
+				
+				<input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="Enter Email"
+            />
+          
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control eyelash"
+              placeholder="Enter Password"
+            /><i class="far fa-eye" id="togglePassword"></i>
+				<br>
+				<button>Sign In</button>
+				
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-left">
+					
+					<h1>Welcome Back!</h1>
+					<p>Already Registered? Sign In here</p>
+					<button id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-right">
+					
+					<h1>Hi There!</h1>
+					<p>Enter your personal details and start journey with us</p>
+					<button id="signUp">Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const signUpButton = document.getElementById('signUp');
+		const signInButton = document.getElementById('signIn');
+		const main = document.getElementById('main');
+
+		signUpButton.addEventListener('click', () => {
+			main.classList.add("right-panel-active");
+		});
+		signInButton.addEventListener('click', () => {
+			main.classList.remove("right-panel-active");
+		});
+	</script>
+	<script type="text/javascript">
+		const togglePassword = document.querySelector('#togglePassword');
+		const password = document.querySelector('.eyelash');
+		togglePassword.addEventListener('click', function (e) {
+    	// toggle the type attribute
+    	const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+   	 	password.setAttribute('type', type);
+    	// toggle the eye slash icon
+    	this.classList.toggle('fa-eye-slash');
+});
+
+	</script>
+</body>
+</html>

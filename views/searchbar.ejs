@@ -1,0 +1,30 @@
+
+  <!-- End -->
+  <style>
+      .form-control::placeholder {
+  font-size: 0.95rem;
+  color: rgb(173, 164, 164);
+  font-style: italic;
+}
+  </style>
+
+
+
+
+        <!-- Custom rounded search bars with input group -->
+        
+        <form action="/topics" method="GET">
+            <div class="input-group mb-4">
+                <input type="text" name ="name" value="<%= searchOptions.name %>" placeholder="Enter name of topic to search..." aria-describedby="button-addon6" class="form-control">
+                <div class="input-group-append">
+                  <button id="button-addon6" type="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            
+          </form>
+          
+          <!-- End -->
+  
+  
+  
+  

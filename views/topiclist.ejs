@@ -1,0 +1,110 @@
+
+<style> 
+
+
+  .pointer-link { 
+      cursor: pointer; 
+  } 
+  .baseBlock {
+	margin: 0px 0px 35px 0px !important;
+	padding: 0 0 15px 0px !important;
+	border-radius: 5px;
+	overflow: hidden;
+	min-height: 170px;
+	background: #fff;
+	-moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	-o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.baseBlock:hover {
+	-webkit-transform: translate(0, -8px);
+	-moz-transform: translate(0, -8px);
+	-ms-transform: translate(0, -8px);
+	-o-transform: translate(0, -8px);
+	transform: translate(0, -8px);
+	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+
+<%- include("./partials/navbar"); %>
+
+
+
+<div style="margin-left:14px;"><%- include("./searchbar"); %></div>
+
+<div style="width:30%"><%- include ("./partials/messages"); %></div>
+
+
+<button class="btn btn-outline-success mb-2" data-target="#mymodel" 
+data-toggle="modal" style="margin-left: 14px;" >Add Questions</button>
+<div class="modal fade" id="mymodel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 >Post Question</h3>
+                <button type="button" class="close" data-dismiss="modal"> &times; </button>
+            </div>
+            <div class="modal-body">
+                <form action="/topics" method="POST">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input
+                        name="name"
+                        class="form-control"
+                        placeholder="Enter question name"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="link">Link</label>
+                      <input
+                        name="link"
+                        class="form-control"
+                        placeholder="Enter URL of Question"
+                      />
+                    </div>
+                    <div class="form-group">
+                        <label>Topic:</label>
+                        <select name="topic">
+                          <% topics.forEach(topic => { %>
+                            <% if (topic.id === question.topics) { %>
+                              <option selected value="<%= topic.id %>"><label><%= topic.name %></label></option> 
+                            <% } else { %>
+                                <option selected value="<%= topic.id %>"><label><%= topic.name %></label></option>
+                            <% } %>
+                          <% }) %>
+                        </select>
+                    </div>
+                    <input type="submit" class="btn btn-block btn-outline-danger" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br><br>
+<div class="container ">
+  <div class="row">
+    
+    <% topics.forEach(topic => { %>
+  
+     
+      <div class="col-md-4 m-auto">
+        <div class="card baseBlock">
+          <a href="/topics/<%= topic.id %>"><img class="card-img-top" data-src="holder.js/100px180/" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="<%= topic.imgurl %>" data-holder-rendered="true"></a>
+          <div class="card-body">
+            <h4 class="card-title text-center"><%= topic.name %></h4>
+       
+       
+          </div>
+        </div>
+     </div>
+     <%})%>
+  </div>
+</div>
+<%- include("./partials/footer"); %>
+
+
+
+
